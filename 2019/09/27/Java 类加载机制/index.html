@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="笔记,Java,面试,索引,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="有东西被加密了, 请输入密码查看.">
+<meta name="keywords" content="笔记,Java,面试,索引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java类的加载机制">
+<meta property="og:url" content="http://yoursite.com/2019/09/27/Java 类加载机制/index.html">
+<meta property="og:site_name" content="nimg&#39;s note">
+<meta property="og:description" content="有东西被加密了, 请输入密码查看.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-01T14:33:28.711Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java类的加载机制">
+<meta name="twitter:description" content="有东西被加密了, 请输入密码查看.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/27/Java 类加载机制/">
+
+
+
+
+
+  <title>Java类的加载机制 | nimg's note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nimg's note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/27/Java 类加载机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nimg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nimg's note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java类的加载机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-27T00:00:00+08:00">
+                2019-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div id="hexo-blog-encrypt" data-wpm="抱歉, 这个密码看着不太对, 请再试试." data-whm="抱歉, 这个文章不能被校验, 不过您还是能看看解密后的内容."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="您好, 这里需要密码."><label>您好, 这里需要密码.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="07cda6ce8b6f19638ccbb67508da927eec5fcd4b57a02c085aa55927d472defd">55ba8f056a78232db8e19d20653131a2f55c8b5d5f894606f7433e5ec83ebf71b2c4e8f6abbb261325b73108b5bad79d9d022036c33658b95b7a7da41f1a09b22ef949699582b3940acf5e1698954354185c6a1f86da8e60d8613bc2c711f51d3569d709acb133f8689a5a796516af5152e8302ac83a5e34888bbe2019680283e93da4020022621ad0a35e74e4fb5b8e436b753240f68a6be60952de95655722fa9b480bc41e1e6ef874c572131c9e0043f7d09f90f0cf9dec5016a49462672fb3e14924b5ce51232c787cb6b4a41f7444e8781ada6e58231fa798feaf14437ce07539093008bcb0f92ff2c8cdba8286ad2a69f15e66213fa5d22fed6e004b27ab0b871150ab5897a54a7d48066fe99dd406c76b0fc881e0da1d3209371c90aff8698effb7f145cf9e1882553895ff460a83641dd94de4816a061512b36c34da6d873c578dea58cae519043bea3230bc5739086b4327df370ae6ed8c0b242e66025c2d715fc343f45ac67b6145240ce9eeb61321df536b68f05b35d2c17476b91fee24ed0b78c13813f903a8e20d9ed86d211ea278a0304f3df29fe6d3023d9d8b65aef90313d8e6d154d160b0274f2412f48c4c957d48387a6b0bb7cb8d1e73b8c13951b900a9baf36e5d147b599901d993eea4834bf13d0e2f091bbdbc97b73d411fb029b250349afae2fe2b1dc346820edace53be50c22328ded80a1ba771c5df8f86c543a77f0e15be887f77e9357af68dea27c2451566d2b234e3e0bca555577e9d4ce6936bfb6479a4fabf60ac940bb1e672369a4f78d7c705921db61a71ba2e9e5fe768781de2b16ec00986ffc0997ceca3f9c479d2e026447d452869cf608f7cd7c30760a09ec1c72fe91bda7a594982a7b63d849ee8698deb3ca38ffbdae1d9da521f9f5d588be9cf5ea350759366d7bf5fc58c8923204c4625ee03177e0750837e81f166084d1ea1e81f20ae1e2742ea6f33497883852fa8e4ede7954a66532bc9da7fc8dc9511f506c800fbc33354020a058c25245e7531ca8118cfb7c5b9aa617e2aab61bf38636bcdc534f95f82a47fcb86b2d0d719142bb9e73806f106d28ee925e3c0d234efa5b6262332acd9f581a0628cb8a9daaa4a161f47e3838849f2cdaca160dbb4b152e51a86e9b7f317526da5c8710cf9c5c1ff211c0cab4e5121ffbc336d32e8fffa4189228a9ab33d44b79b94577489cf33084e2741c1a9db54ed2ac354bfcdf1fed4de4c96c6895ea0e84197e458ef7fccb2b93c981fedad5b5d835ec81e7bac008989da42d63036e12611681e1257950b82faa6fe885d5b95a5dbe09f9361d4c1a24d46e9dee25f2af30fd8ce6ad2137f69d854201773910ca9079b6c47c20063a6d087af68540bd1631f2a0b0908e821313ee969cfab780271bbf200b8c31b8e3e40a9b38c849211f801c8c2d094189aef6f120c20ac679dcbeeb5772f85c23fe74f1f56e77d2733b16ae6d68dd3875b4e586e10b9c995e1d8e6052c7b01240047b6396907f69b5bf58b98e633d07bdebb3695ef3e58700409dd9846fba5a0f69e89f8b061986454025fc1fadb8a1ceecb439a7f53a1f4d135d59a797e0b3d309adc2249bda93068243b1836c9881a33693ad2758b795113875e07ce2f82e2252408f9cd97ec7a2d22d6d95bfc3d0021e516ba1872b9cacd80228b26761a7224e0f77213c83c1ebf9a9044be255fe7eac1615189cc27f5ac4373c02e5290d079ce7914a0f1884e5399b2723188b12ee459c21ce944de3f68534fcaa2781d4ea3a85866bed3472fdffdd560dc3e809215e28ef81bf1f03cae4a3296a8f0ab7fc17b9ecf9ee3e0d03dba465ec57807ea5d165de0a2d56abdbac82e37bd93a244f393aa6c5539bdc8f044b0e543cd602a28dfe596ae96b53d1eafe020129d02d508638259aa75420f105c7557b0604e282a1e4757a3af91cd29c048f9d22006bfa44a6944820cc5c16e735adfa88d0d4426299d598162706042134fd495334d2f4bb6248b6238f58bccd2a91c3e58d4c9ad02ebc31506c6be0712bded04da43538508f4e088c4643867f873de577bcec03c656c0b8b4d3f1c74e76d1de44b303ba6a3355eafffa9c79b1e338ead59bd89a2b39ffe2a24dcd55785f43bdfdc57a5f92f30</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+            <a href="/tags/索引/" rel="tag"># 索引</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/27/Java面试知识点/" rel="next" title="Java面试知识索引">
+                <i class="fa fa-chevron-left"></i> Java面试知识索引
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/28/Java GC算法/" rel="prev" title="Java JVM内存结构">
+                Java JVM内存结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">nimg</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nimg</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

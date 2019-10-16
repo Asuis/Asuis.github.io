@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,面试,索引,原创,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="计算机网络路由算法Java基础知识SpringSpring IocSpring AopJVM 相关Java 内存结构 Java 并发Java NIO相关传统IO处理客户端请求的最小单位是线程,而NIO使用了比线程还小一级的单位：通道（Channel）.可以说，NIO中只需要一个线程就能完成所有接收，读，写等操作.NIO包括三大核心:  Selector，选择器 Buffer，缓冲区 Channel">
+<meta name="keywords" content="Java,面试,索引,原创">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java面试知识索引">
+<meta property="og:url" content="http://yoursite.com/2019/09/27/Java面试知识点/index.html">
+<meta property="og:site_name" content="nimg&#39;s note">
+<meta property="og:description" content="计算机网络路由算法Java基础知识SpringSpring IocSpring AopJVM 相关Java 内存结构 Java 并发Java NIO相关传统IO处理客户端请求的最小单位是线程,而NIO使用了比线程还小一级的单位：通道（Channel）.可以说，NIO中只需要一个线程就能完成所有接收，读，写等操作.NIO包括三大核心:  Selector，选择器 Buffer，缓冲区 Channel">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-12T02:54:19.663Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java面试知识索引">
+<meta name="twitter:description" content="计算机网络路由算法Java基础知识SpringSpring IocSpring AopJVM 相关Java 内存结构 Java 并发Java NIO相关传统IO处理客户端请求的最小单位是线程,而NIO使用了比线程还小一级的单位：通道（Channel）.可以说，NIO中只需要一个线程就能完成所有接收，读，写等操作.NIO包括三大核心:  Selector，选择器 Buffer，缓冲区 Channel">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/27/Java面试知识点/">
+
+
+
+
+
+  <title>Java面试知识索引 | nimg's note</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nimg's note</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/27/Java面试知识点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nimg">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nimg's note">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java面试知识索引</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-27T00:00:00+08:00">
+                2019-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="路由算法"><a href="#路由算法" class="headerlink" title="路由算法"></a>路由算法</h2><h1 id="Java基础知识"><a href="#Java基础知识" class="headerlink" title="Java基础知识"></a>Java基础知识</h1><h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><h3 id="Spring-Ioc"><a href="#Spring-Ioc" class="headerlink" title="Spring Ioc"></a>Spring Ioc</h3><h3 id="Spring-Aop"><a href="#Spring-Aop" class="headerlink" title="Spring Aop"></a>Spring Aop</h3><h1 id="JVM-相关"><a href="#JVM-相关" class="headerlink" title="JVM 相关"></a>JVM 相关</h1><h2 id="Java-内存结构"><a href="#Java-内存结构" class="headerlink" title="Java 内存结构"></a>Java 内存结构</h2><hr>
+<h1 id="Java-并发"><a href="#Java-并发" class="headerlink" title="Java 并发"></a>Java 并发</h1><h1 id="Java-NIO相关"><a href="#Java-NIO相关" class="headerlink" title="Java NIO相关"></a>Java NIO相关</h1><p>传统IO处理客户端请求的最小单位是线程,而NIO使用了比线程还小一级的单位：通道（Channel）.<br>可以说，NIO中只需要一个线程就能完成所有接收，读，写等操作.<br>NIO包括三大核心:</p>
+<ul>
+<li>Selector，选择器</li>
+<li>Buffer，缓冲区</li>
+<li>Channel，通道</li>
+</ul>
+<h2 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h2><h1 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h1><h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><hr>
+<h3 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h3><h4 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h4><h4 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h4><h4 id="Consul"><a href="#Consul" class="headerlink" title="Consul"></a>Consul</h4><h3 id="服务网关"><a href="#服务网关" class="headerlink" title="服务网关"></a>服务网关</h3><h4 id="Zuul"><a href="#Zuul" class="headerlink" title="Zuul"></a>Zuul</h4><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h4 id="Grpc"><a href="#Grpc" class="headerlink" title="Grpc"></a>Grpc</h4><h4 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h4><h3 id="消息总线"><a href="#消息总线" class="headerlink" title="消息总线"></a>消息总线</h3><h4 id="kafka"><a href="#kafka" class="headerlink" title="kafka"></a>kafka</h4><h2 id="基于zooKeeper实现的分布式锁"><a href="#基于zooKeeper实现的分布式锁" class="headerlink" title="基于zooKeeper实现的分布式锁"></a>基于zooKeeper实现的分布式锁</h2><h3 id="思路1"><a href="#思路1" class="headerlink" title="思路1"></a>思路1</h3><ol>
+<li><p>客户端加锁时创建一个临时节点，创建成功则加锁成功。</p>
+</li>
+<li><p>加锁失败则创建一个监听器用于监听这个节点的变化，然后当前线程进入等待。</p>
+</li>
+<li><p>持有锁的客户端解锁时会删除这个节点，或者会话结束自动被删除。</p>
+</li>
+<li><p>监听器监听到节点的删除通知等待的客户端去重新获取锁</p>
+</li>
+</ol>
+<h3 id="思路２"><a href="#思路２" class="headerlink" title="思路２"></a>思路２</h3><ol>
+<li><p>这里所有的客户端都能创建临时顺序节点，只有加锁路径下第一个节点才能获取锁；</p>
+</li>
+<li><p>获取锁失败的客户端并不监听获取锁的客户端的节点，而是监听自己的前一个节点；</p>
+</li>
+<li><p>具有可重入性；</p>
+</li>
+</ol>
+<p>整体流程：加锁时对某个路径创建临时顺序节点，如果当前已经获取了锁，那么加锁次数加一；<br>否则如果创建的临时节点是当前路径下第一个节点那么加锁成功；<br>否则找到当前加锁路径下的子节点列表，找到自己的前一个节点并监听然后进入等待，如果前一个节点释放了锁或者当前会话失效那么节点删除触发监听事件，注册监听的线程唤醒重新获取锁。</p>
+<hr>
+<h1 id="Java性能优化"><a href="#Java性能优化" class="headerlink" title="Java性能优化"></a>Java性能优化</h1><h2 id="性能诊断工具"><a href="#性能诊断工具" class="headerlink" title="性能诊断工具"></a>性能诊断工具</h2><h3 id="OS-诊断"><a href="#OS-诊断" class="headerlink" title="OS 诊断"></a>OS 诊断</h3><blockquote>
+<p>OS 的诊断主要关注的是 CPU、Memory、I/O 三个方面。</p>
+</blockquote>
+<h4 id="CPU-诊断"><a href="#CPU-诊断" class="headerlink" title="CPU 诊断"></a>CPU 诊断</h4><p>对于 CPU 主要关注平均负载（Load Average），CPU 使用率，上下文切换次数（Context Switch）</p>
+<p>通过 top 命令可以查看系统平均负载和 CPU 使用率，图 2 为通过 top 命令查看某系统的状态。</p>
+<p>按照经验，若数值小于 0.7*CPU 个数，则系统工作正常；若超过这个值，甚至达到 CPU 核数的四五倍，则系统的负载就明显偏高。</p>
+<p>通过 vmstat 命令可以查看 CPU 的上下文切换次数，如图 3 所示：</p>
+<p>上下文切换次数发生的场景主要有如下几种：</p>
+<ol>
+<li>时间片用完，CPU 正常调度下一个任务</li>
+<li>被其它优先级更高的任务抢占</li>
+<li>执行任务碰到 I/O 阻塞，挂起当前任务，切换到下一个任务</li>
+<li>用户代码主动挂起当前任务让出 CPU</li>
+<li>多任务抢占资源，由于没有抢到被挂起</li>
+<li>硬件中断</li>
+</ol>
+<p>Java 线程上下文切换主要来自共享资源的竞争。一般单个对象加锁很少成为系统瓶颈，除非锁粒度过大。但在一个访问频度高，对多个对象连续加锁的代码块中就可能出现大量上下文切换，成为系统瓶颈。</p>
+<h4 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h4><p>从操作系统角度，内存关注应用进程是否足够，可以使用 free –m 命令查看内存的使用情况。</p>
+<p>通过 top 命令可以查看进程使用的虚拟内存 VIRT 和物理内存 RES，根据公式 VIRT = SWAP + RES 可以推算出具体应用使用的交换分区（Swap）情况，使用交换分区过大会影响 Java 应用性能，可以将 swappiness 值调到尽可能小。因为对于 Java 应用来说，占用太多交换分区可能会影响性能，毕竟磁盘性能比内存慢太多。</p>
+<h4 id="I-O"><a href="#I-O" class="headerlink" title="I/O"></a>I/O</h4><p>I/O 包括磁盘 I/O 和网络 I/O，一般情况下磁盘更容易出现 I/O 瓶颈。通过 iostat 可以查看磁盘的读写情况，通过 CPU 的 I/O wait 可以看出磁盘 I/O 是否正常。如果磁盘 I/O 一直处于很高的状态，说明磁盘太慢或故障，成为了性能瓶颈，需要进行应用优化或者磁盘更换。</p>
+<p>除了常用的 top、 ps、vmstat、iostat 等命令，还有其他 Linux 工具可以诊断系统问题，如 mpstat、tcpdump、netstat、pidstat、sar 等。</p>
+<h3 id="Java-应用诊断工具"><a href="#Java-应用诊断工具" class="headerlink" title="Java 应用诊断工具"></a>Java 应用诊断工具</h3><p>应用代码性能问题是相对好解决的一类性能问题。通过一些应用层面监控报警，如果确定有问题的功能和代码，直接通过代码就可以定位；或者通过 top+jstack，找出有问题的线程栈，定位到问题线程的代码上，也可以发现问题。对于更复杂，逻辑更多的代码段，通过 Stopwatch 打印性能日志往往也可以定位大多数应用代码性能问题。</p>
+<p>常用的 Java 应用诊断包括线程、堆栈、GC 等方面的诊断。</p>
+<p>jstack 命令通常配合 top 使用，通过 top -H -p pid 定位 Java 进程和线程，再利用 jstack -l pid 导出线程栈。由于线程栈是瞬态的，因此需要多次 dump，一般 3 次 dump，一般每次隔 5s 就行。将 top 定位的 Java 线程 pid 转成 16 进制，得到 Java 线程栈中的 nid，可以找到对应的问题线程栈。</p>
+<h4 id="JProfiler"><a href="#JProfiler" class="headerlink" title="JProfiler"></a>JProfiler</h4><p>JProfiler 可对 CPU、堆、内存进行分析，功能强大，如图 7 所示。同时结合压测工具，可以对代码耗时采样统计。</p>
+<h4 id="GC-诊断"><a href="#GC-诊断" class="headerlink" title="GC 诊断"></a>GC 诊断</h4><p>Java GC 解决了程序员管理内存的风险，但 GC 引起的应用暂停成了另一个需要解决的问题。JDK 提供了一系列工具来定位 GC 问题，比较常用的有 jstat、jmap，还有第三方工具 MAT 等。</p>
+<p>jstat 命令可打印 GC 详细信息，Young GC 和 Full GC 次数，堆信息等。其命令格式为</p>
+<p>jstat –gcxxx -t pid <interval> <count></count></interval></p>
+<h4 id="jmap"><a href="#jmap" class="headerlink" title="jmap"></a>jmap</h4><p>jmap 打印 Java 进程堆信息 jmap –heap pid。通过 jmap –dump:file=xxx pid 可 dump 堆到文件，然后通过其它工具进一步分析其堆使用情况</p>
+<h4 id="MAT"><a href="#MAT" class="headerlink" title="MAT"></a>MAT</h4><p>MAT 是 Java 堆的分析利器，提供了直观的诊断报告，内置的 OQL 允许对堆进行类 SQL 查询，功能强大，outgoing reference 和 incoming reference 可以对对象引用追根溯源。</p>
+<p>对于 Java 应用，通过 top+jstack+jmap+MAT 可以定位大多数应用和内存问题，可谓必备工具。有些时候，Java 应用诊断需要参考 OS 相关信息，可使用一些更全面的诊断工具，比如 Zabbix（整合了 OS 和 JVM 监控）等。在分布式环境中，分布式跟踪系统等基础设施也对应用性能诊断提供了有力支持。</p>
+<hr>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><h2 id="Mongodb"><a href="#Mongodb" class="headerlink" title="Mongodb"></a>Mongodb</h2><h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h2 id="elasticsearch"><a href="#elasticsearch" class="headerlink" title="elasticsearch"></a>elasticsearch</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+            <a href="/tags/索引/" rel="tag"># 索引</a>
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/04/四级英语 总结/" rel="next" title="cet4 练习纲要">
+                <i class="fa fa-chevron-left"></i> cet4 练习纲要
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/27/Java 类加载机制/" rel="prev" title="Java类的加载机制">
+                Java类的加载机制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">nimg</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#计算机网络"><span class="nav-number">1.</span> <span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#路由算法"><span class="nav-number">1.1.</span> <span class="nav-text">路由算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java基础知识"><span class="nav-number">2.</span> <span class="nav-text">Java基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring"><span class="nav-number">3.</span> <span class="nav-text">Spring</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Ioc"><span class="nav-number">3.0.1.</span> <span class="nav-text">Spring Ioc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Aop"><span class="nav-number">3.0.2.</span> <span class="nav-text">Spring Aop</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM-相关"><span class="nav-number">4.</span> <span class="nav-text">JVM 相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-内存结构"><span class="nav-number">4.1.</span> <span class="nav-text">Java 内存结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-并发"><span class="nav-number">5.</span> <span class="nav-text">Java 并发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-NIO相关"><span class="nav-number">6.</span> <span class="nav-text">Java NIO相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Buffer"><span class="nav-number">6.1.</span> <span class="nav-text">Buffer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分布式"><span class="nav-number">7.</span> <span class="nav-text">分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Cloud"><span class="nav-number">7.1.</span> <span class="nav-text">Spring Cloud</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务发现"><span class="nav-number">7.1.1.</span> <span class="nav-text">服务发现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Eureka"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">Eureka</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Zookeeper"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">Zookeeper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Consul"><span class="nav-number">7.1.1.3.</span> <span class="nav-text">Consul</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务网关"><span class="nav-number">7.1.2.</span> <span class="nav-text">服务网关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Zuul"><span class="nav-number">7.1.2.1.</span> <span class="nav-text">Zuul</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RPC"><span class="nav-number">7.1.3.</span> <span class="nav-text">RPC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Grpc"><span class="nav-number">7.1.3.1.</span> <span class="nav-text">Grpc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dubbo"><span class="nav-number">7.1.3.2.</span> <span class="nav-text">Dubbo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息总线"><span class="nav-number">7.1.4.</span> <span class="nav-text">消息总线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#kafka"><span class="nav-number">7.1.4.1.</span> <span class="nav-text">kafka</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于zooKeeper实现的分布式锁"><span class="nav-number">7.2.</span> <span class="nav-text">基于zooKeeper实现的分布式锁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路1"><span class="nav-number">7.2.1.</span> <span class="nav-text">思路1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路２"><span class="nav-number">7.2.2.</span> <span class="nav-text">思路２</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java性能优化"><span class="nav-number">8.</span> <span class="nav-text">Java性能优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#性能诊断工具"><span class="nav-number">8.1.</span> <span class="nav-text">性能诊断工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OS-诊断"><span class="nav-number">8.1.1.</span> <span class="nav-text">OS 诊断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU-诊断"><span class="nav-number">8.1.1.1.</span> <span class="nav-text">CPU 诊断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Memory"><span class="nav-number">8.1.1.2.</span> <span class="nav-text">Memory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#I-O"><span class="nav-number">8.1.1.3.</span> <span class="nav-text">I/O</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java-应用诊断工具"><span class="nav-number">8.1.2.</span> <span class="nav-text">Java 应用诊断工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JProfiler"><span class="nav-number">8.1.2.1.</span> <span class="nav-text">JProfiler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GC-诊断"><span class="nav-number">8.1.2.2.</span> <span class="nav-text">GC 诊断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jmap"><span class="nav-number">8.1.2.3.</span> <span class="nav-text">jmap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAT"><span class="nav-number">8.1.2.4.</span> <span class="nav-text">MAT</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">9.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql"><span class="nav-number">9.1.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mongodb"><span class="nav-number">9.2.</span> <span class="nav-text">Mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-number">9.3.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#elasticsearch"><span class="nav-number">9.4.</span> <span class="nav-text">elasticsearch</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nimg</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
